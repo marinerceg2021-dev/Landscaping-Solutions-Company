@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Landscaping Solutions Company</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --green:      #173D1E;
+            --green-mid:  #1E5028;
+            --green-lt:   #2D7A3E;
+            --green-pale: #E8F4EA;
+            --gold:       #2E8B3A;
+            --gold-lt:    #3DAA4A;
+            --gold-dim:   #1E5828;
+            --gold-pale:  #ECF6ED;
+            --navy:       #0F2614;
+            --cream:      #F8FAF8;
+            --cream-2:    #EEF6EF;
+            --white:      #FFFFFF;
+            --dark:       #0A1A0C;
+            --muted:      #5C7461;
+            --border:     #C8DEC9;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { background: var(--cream); color: var(--green); font-family: 'Nunito', sans-serif; font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1.4rem 5rem; display: flex; align-items: center; justify-content: space-between;
+            transition: all 0.4s ease; background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(8px); border-bottom: 1px solid rgba(23,61,30,0.08);
+        }
+        nav.scrolled {
+            background: rgba(10,26,12,0.97); backdrop-filter: blur(12px);
+            padding: 0.9rem 5rem; border-bottom: 1px solid rgba(46,139,58,0.2);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+        }
+        .logo { text-decoration: none; display: flex; align-items: center; gap: 0.75rem; }
+        .nav-logo-img { height: 52px; width: auto; object-fit: contain; transition: opacity 0.3s; }
+        nav.scrolled .nav-logo-img { filter: brightness(0) invert(1); }
+        .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+        .logo-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--green); letter-spacing: 0.01em; transition: color 0.4s; }
+        .logo-sub { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-top: 1px; transition: color 0.4s; }
+        nav.scrolled .logo-name { color: var(--white); }
+        nav.scrolled .logo-sub { color: rgba(255,255,255,0.45); }
+        .nav-links { display: flex; gap: 2.2rem; list-style: none; align-items: center; }
+        .nav-links a { font-size: 0.82rem; font-weight: 600; color: var(--green-mid); text-decoration: none; letter-spacing: 0.04em; transition: color 0.25s; }
+        .nav-links a:hover { color: var(--green-lt); }
+        .nav-links a.active { color: var(--green-lt); }
+        nav.scrolled .nav-links a { color: rgba(255,255,255,0.7); }
+        nav.scrolled .nav-links a:hover { color: white; }
+        .nav-cta { background: var(--green) !important; color: var(--white) !important; font-weight: 700 !important; padding: 0.6rem 1.4rem !important; border-radius: 6px !important; font-size: 0.82rem !important; transition: background 0.3s, transform 0.2s !important; }
+        .nav-cta:hover { background: var(--green-mid) !important; transform: translateY(-1px); }
+        nav.scrolled .nav-cta { background: var(--gold) !important; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .hamburger span { display: block; width: 22px; height: 2px; background: var(--green); transition: all 0.3s; }
+        nav.scrolled .hamburger span { background: white; }
+        #mob-menu { display: none; position: fixed; inset: 0; background: var(--dark); z-index: 99; padding: 6rem 2.5rem 2rem; flex-direction: column; }
+        #mob-menu a { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: white; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 1.2rem 0; display: block; }
+        #mob-menu .mob-gold { color: var(--green-pale); border: none; font-size: 1.1rem; font-family: 'Nunito', sans-serif; font-weight: 600; margin-top: 1rem; }
+
+        /* ── PAGE HERO ── */
+        .page-hero {
+            min-height: 55vh;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10rem 5rem 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::after {
+            content: '';
+            position: absolute; bottom: -2px; left: 0; right: 0; height: 80px;
+            background: var(--cream);
+            clip-path: polygon(0 100%, 100% 100%, 100% 0%);
+        }
+        .hero-shape {
+            position: absolute; right: -100px; top: -100px;
+            width: 500px; height: 500px;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            background: radial-gradient(ellipse, rgba(46,139,58,0.05) 0%, transparent 70%);
+            animation: morphShape 14s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes morphShape {
+            0%,100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            33% { border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%; }
+            66% { border-radius: 30% 70% 40% 60% / 60% 30% 70% 40%; }
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(46,139,58,0.08); border: 1px solid rgba(46,139,58,0.2);
+            border-radius: 100px; padding: 0.38rem 1rem; margin-bottom: 1.75rem;
+            opacity: 0; animation: fadeUp 0.6s ease 0.2s forwards;
+        }
+        .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-lt); animation: pulse 2s ease infinite; flex-shrink: 0; }
+        .badge-dot-right { width: 6px; height: 6px; border-radius: 50%; background: var(--green-lt); animation: pulse 2s ease infinite; flex-shrink: 0; }
+        .badge-text { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green-mid); }
+        @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(0.75); } }
+        .page-hero-headline {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 5vw, 5.5rem);
+            font-weight: 400; line-height: 1.05; letter-spacing: -0.02em;
+            color: var(--green); margin-bottom: 1.25rem;
+            opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards;
+        }
+        .page-hero-headline em { font-style: normal; color: var(--green-lt); }
+        .page-hero-sub {
+            font-size: 1rem; color: var(--muted); line-height: 1.85; max-width: 520px;
+            opacity: 0; animation: fadeUp 0.8s ease 0.5s forwards;
+        }
+
+        /* ── SHARED ── */
+        .sec-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase; color: var(--green-lt); margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.75rem; }
+        .sec-label::before { content: ''; display: block; width: 24px; height: 2px; background: var(--green-lt); }
+        .sec-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; color: var(--green); margin-bottom: 1rem; }
+        .sec-title em { font-style: normal; color: var(--green-lt); }
+
+        /* ── SERVICES FULL ── */
+        /* ── SERVICE PANELS ── */
+        .services-full { padding: 0; }
+        .svc-panel {
+            position: relative;
+            height: 480px;
+            display: flex; align-items: center;
+            background-size: cover; background-position: center;
+            background-color: #0f2a14;
+        }
+        /* Dark overlay so text is always readable */
+        .svc-panel::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: rgba(5, 14, 7, 0.62);
+        }
+        /* Alternate: left-anchored text on odd, right-anchored on even */
+        .svc-panel:nth-child(odd)::before  { background: linear-gradient(to right, rgba(5,14,7,0.85) 0%, rgba(5,14,7,0.55) 50%, rgba(5,14,7,0.25) 100%); }
+        .svc-panel:nth-child(even)::before { background: linear-gradient(to left,  rgba(5,14,7,0.85) 0%, rgba(5,14,7,0.55) 50%, rgba(5,14,7,0.25) 100%); }
+
+        .svc-panel-inner {
+            position: relative; z-index: 1;
+            width: 100%; max-width: 1200px; margin: 0 auto;
+            padding: 0 5rem;
+        }
+        .svc-panel-content { max-width: 480px; }
+        .svc-panel:nth-child(even) .svc-panel-content { margin-left: auto; text-align: right; }
+
+        .svc-panel-num {
+            font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 400;
+            color: rgba(255,255,255,0.07); line-height: 1; display: block; margin-bottom: -0.5rem;
+        }
+        .svc-panel-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400;
+            color: #fff; line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.02em;
+        }
+        .svc-panel-desc { font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 1.5rem; max-width: 420px; }
+        .svc-panel:nth-child(even) .svc-panel-desc { margin-left: auto; }
+        .svc-panel-tag {
+            display: inline-block;
+            font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.55);
+            border-radius: 100px; padding: 0.3rem 0.9rem;
+        }
+
+        /* ── WHY US ── */
+        .why { background: var(--green); padding: 8rem 5rem 9rem; position: relative; overflow: hidden; }
+        .why::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(61,170,74,0.12) 0%, transparent 55%), radial-gradient(ellipse at 10% 80%, rgba(255,255,255,0.04) 0%, transparent 50%); }
+        .why::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 80px; background: var(--cream-2); clip-path: polygon(0 100%, 100% 100%, 100% 0%); }
+        .why-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+        .why-header { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; margin-bottom: 4rem; }
+        .why .sec-label { color: rgba(255,255,255,0.45); }
+        .why .sec-label::before { background: rgba(255,255,255,0.25); }
+        .why-headline { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 400; color: var(--white); line-height: 1.15; letter-spacing: -0.02em; }
+        .why-headline em { font-style: normal; color: rgba(255,255,255,0.45); }
+        .why-tagline { font-size: 1rem; color: rgba(255,255,255,0.55); line-height: 1.85; max-width: 380px; align-self: end; }
+        .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        .why-grid-bottom { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 1.25rem; max-width: calc(66.66% - 0.42rem); margin-left: auto; margin-right: auto; }
+        .why-card {
+            background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px; padding: 2.25rem 2rem;
+            transition: background 0.35s, transform 0.35s, border-color 0.35s, box-shadow 0.35s;
+            position: relative; overflow: hidden;
+        }
+        .why-card::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 60%);
+            opacity: 0; transition: opacity 0.35s;
+        }
+        .why-card:hover { background: rgba(255,255,255,0.11); transform: translateY(-5px); border-color: rgba(255,255,255,0.25); box-shadow: 0 20px 50px rgba(0,0,0,0.25); }
+        .why-card:hover::before { opacity: 1; }
+        .why-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+        .why-icon { width: 46px; height: 46px; background: rgba(255,255,255,0.12); border-radius: 11px; display: flex; align-items: center; justify-content: center; transition: background 0.3s; flex-shrink: 0; }
+        .why-card:hover .why-icon { background: rgba(255,255,255,0.2); }
+        .why-icon svg { width: 22px; height: 22px; stroke: rgba(255,255,255,0.85); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+        .why-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 400; color: rgba(255,255,255,0.1); line-height: 1; }
+        .why-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--white); margin-bottom: 0.65rem; letter-spacing: -0.01em; }
+        .why-desc { font-size: 0.88rem; color: rgba(255,255,255,0.52); line-height: 1.8; }
+
+        /* ── QUOTE FORM ── */
+        .quote-section { background: var(--cream-2); padding: 7rem 5rem; }
+        .quote-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+        .quote-left .cta-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 400; color: var(--green); margin-bottom: 1rem; letter-spacing: -0.02em; line-height: 1.2; }
+        .quote-left .cta-title em { font-style: normal; color: var(--green-lt); }
+        .quote-left .cta-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.85; margin-bottom: 2rem; }
+        .quote-trust { display: flex; flex-direction: column; gap: 0.75rem; }
+        .quote-trust-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.88rem; color: var(--green-mid); font-weight: 600; }
+        .quote-trust-item::before { content: '✓'; display: flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: var(--green); color: white; border-radius: 50%; font-size: 0.7rem; flex-shrink: 0; }
+        .quote-form { background: var(--white); border-radius: 16px; padding: 2.5rem; box-shadow: 0 4px 40px rgba(23,61,30,0.08); }
+        .form-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: var(--green); margin-bottom: 0.4rem; }
+        .form-subtitle { font-size: 0.82rem; color: var(--muted); margin-bottom: 2rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+        .form-group label { font-size: 0.78rem; font-weight: 700; color: var(--green); letter-spacing: 0.04em; text-transform: uppercase; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 0.85rem 1rem; border: 1.5px solid var(--border); border-radius: 8px;
+            font-family: 'Nunito', sans-serif; font-size: 0.92rem; color: var(--dark);
+            background: var(--white); outline: none; transition: border-color 0.25s, box-shadow 0.25s;
+            box-sizing: border-box;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--green-lt); box-shadow: 0 0 0 3px rgba(45,122,62,0.12);
+        }
+        .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23173D1E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
+        .form-group textarea { resize: vertical; min-height: 90px; }
+        .form-submit { width: 100%; padding: 1.1rem; background: var(--green); color: white; border: none; border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 700; letter-spacing: 0.05em; cursor: pointer; transition: background 0.3s, transform 0.2s; margin-top: 0.5rem; }
+        .form-submit:hover { background: var(--green-mid); transform: translateY(-1px); }
+        .form-note { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 1rem; }
+        .form-success { display: none; text-align: center; padding: 2rem; }
+        .form-success-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .form-success h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--green); margin-bottom: 0.5rem; }
+        .form-success p { font-size: 0.9rem; color: var(--muted); }
+
+        /* ── CTA ── */
+        .cta-section { background: var(--white); padding: 5rem 5rem; text-align: center; }
+        .cta-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 400; color: var(--green); margin-bottom: 1rem; letter-spacing: -0.02em; }
+        .cta-title em { font-style: normal; color: var(--green-lt); }
+        .cta-sub { font-size: 0.95rem; color: var(--muted); max-width: 420px; margin: 0 auto 2.5rem; line-height: 1.85; }
+        .cta-phone { display: block; font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; color: var(--green); text-decoration: none; letter-spacing: -0.02em; margin-bottom: 2rem; transition: color 0.3s; }
+        .cta-phone:hover { color: var(--green-lt); }
+        .cta-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .btn-green { display: inline-block; background: var(--green); color: var(--white); font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; padding: 1rem 2rem; border-radius: 8px; transition: background 0.3s, transform 0.2s; }
+        .btn-green:hover { background: var(--green-mid); transform: translateY(-2px); }
+        .btn-outline-green { display: inline-block; color: var(--green); font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 600; letter-spacing: 0.04em; text-decoration: none; padding: 1rem 1.75rem; border: 1.5px solid rgba(23,61,30,0.3); border-radius: 8px; transition: border-color 0.3s, background 0.3s; }
+        .btn-outline-green:hover { border-color: var(--green); background: var(--green-pale); }
+
+        /* ── FOOTER ── */
+        footer { background: var(--dark); padding: 4rem 5rem; border-top: 1px solid rgba(46,139,58,0.15); }
+        .footer-inner { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+        .footer-desc { font-size: 0.82rem; color: rgba(255,255,255,0.35); line-height: 1.75; margin-top: 1rem; max-width: 280px; }
+        .footer-heading { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; color: rgba(255,255,255,0.65); margin-bottom: 1.25rem; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+        .footer-links a { font-size: 0.82rem; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.25s; }
+        .footer-links a:hover { color: var(--gold-lt); }
+        .footer-contact-item { font-size: 0.82rem; color: rgba(255,255,255,0.35); margin-bottom: 0.6rem; }
+        .footer-contact-item strong { color: rgba(255,255,255,0.6); }
+        .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.2); text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.06); }
+        .footer-gold { color: var(--gold-lt); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        .reveal { opacity:0; transform:translateY(32px); transition: opacity 0.75s ease, transform 0.75s ease; }
+        .reveal.on { opacity:1; transform:translateY(0); }
+        .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; }
+        .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1100px) {
+            .why-grid { grid-template-columns: 1fr 1fr; }
+            .footer-inner { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 1.2rem 1.5rem; }
+            nav.scrolled { padding: 0.9rem 1.5rem; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .page-hero { padding: 8rem 1.5rem 5rem; }
+            .services-full, .why, .cta-section, .quote-section { padding: 5rem 1.5rem; }
+            .svc-panel { height: auto; min-height: 340px; padding: 4rem 0; }
+            .svc-panel-inner { padding: 0 1.5rem; }
+            .svc-panel:nth-child(even) .svc-panel-content { margin-left: 0; text-align: left; }
+            .svc-panel:nth-child(even) .svc-panel-desc { margin-left: 0; }
+            .why-header { grid-template-columns: 1fr; gap: 1.5rem; }
+            .why-grid { grid-template-columns: 1fr; }
+            .why-grid-bottom { grid-template-columns: 1fr; max-width: 100%; }
+            footer { padding: 3rem 1.5rem; }
+            .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+            .cta-btns { flex-direction: column; align-items: center; }
+            .quote-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+    <a href="index.html" class="logo">
+        <img src="logo-dark-green.png" alt="Landscaping Solutions Company" class="nav-logo-img">
+        <div class="logo-text">
+            <span class="logo-name">Landscaping Solutions</span>
+            <span class="logo-sub">Greater Pittsburgh, PA</span>
+        </div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="cuts-for-vets.html">Cuts For Vets</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="index.html#mission">About</a></li>
+        <li><a href="index.html#contact" class="nav-cta">Call (412) 513-1335</a></li>
+    </ul>
+    <div class="hamburger" id="ham" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<div id="mob-menu">
+    <a href="cuts-for-vets.html" onclick="toggleMenu()">Cuts For Vets</a>
+    <a href="services.html" onclick="toggleMenu()">Services</a>
+    <a href="index.html#mission" onclick="toggleMenu()">About</a>
+    <a href="index.html#contact" class="mob-gold" onclick="toggleMenu()">Call (412) 513-1335</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+    <div class="hero-shape"></div>
+    <div class="hero-badge">
+        <div class="badge-dot"></div>
+        <span class="badge-text">Greater Pittsburgh · Mon–Sun 9am–5pm</span>
+        <div class="badge-dot-right"></div>
+    </div>
+    <h1 class="page-hero-headline">Everything your yard<br>needs, <em>year round</em></h1>
+    <p class="page-hero-sub">From weekly grass cutting to full pond installations and snow removal — we handle it all. Affordable, dependable, and always free quotes.</p>
+</section>
+
+<!-- SERVICE PANELS -->
+<section class="services-full">
+
+    <div class="svc-panel" style="background-image: url('https://images.unsplash.com/photo-1558904541-efa843a96f01?w=1400&q=80'); background-color:#122b16;">
+        <div class="svc-panel-inner">
+            <div class="svc-panel-content reveal">
+                <span class="svc-panel-num">01</span>
+                <div class="svc-panel-name">Lawn Mowing</div>
+                <p class="svc-panel-desc">Reliable, precision mowing that keeps your lawn looking its best week after week. We work around your schedule and leave every edge clean.</p>
+                <span class="svc-panel-tag">Most Popular</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="svc-panel" style="background-image: url('https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1400&q=80'); background-color:#0e2412;">
+        <div class="svc-panel-inner">
+            <div class="svc-panel-content reveal">
+                <span class="svc-panel-num">02</span>
+                <div class="svc-panel-name">Hedge Trimming</div>
+                <p class="svc-panel-desc">Sharp, clean cuts that shape your shrubs and hedges into something to be proud of — from small bushes to large boundary hedges.</p>
+                <span class="svc-panel-tag">Year Round</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="svc-panel" style="background-image: url('https://images.unsplash.com/photo-1761637823941-0ffae96ec487?w=1400&q=80'); background-color:#142e18;">
+        <div class="svc-panel-inner">
+            <div class="svc-panel-content reveal">
+                <span class="svc-panel-num">03</span>
+                <div class="svc-panel-name">Retaining Walls</div>
+                <p class="svc-panel-desc">Structural walls built to hold, beautify, and add lasting value. Designed and installed to be as functional as they are attractive.</p>
+                <span class="svc-panel-tag">Installation</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="svc-panel" style="background-image: url('https://www.thespruce.com/thmb/RyLe5Gra3b-ORHaNP-izQg3v0gc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/wfsmallpondfernsElmarLangle-c2a6fcb7ba6946dca794da2602a6dc3b.jpg'); background-color:#0c2010;">
+        <div class="svc-panel-inner">
+            <div class="svc-panel-content reveal">
+                <span class="svc-panel-num">04</span>
+                <div class="svc-panel-name">Pond &amp; Waterfalls</div>
+                <p class="svc-panel-desc">Custom water features that transform your outdoor space into a peaceful retreat. From small garden ponds to full waterfall installations.</p>
+                <span class="svc-panel-tag">Installation</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="svc-panel" style="background-image: url('https://t4.ftcdn.net/jpg/11/19/45/21/360_F_1119452102_u4C5DuHfoIKleb1c3BoO6dVSif6OvSjT.jpg'); background-color:#122b16;">
+        <div class="svc-panel-inner">
+            <div class="svc-panel-content reveal">
+                <span class="svc-panel-num">05</span>
+                <div class="svc-panel-name">Installations</div>
+                <p class="svc-panel-desc">Plants, beds, borders, mulching and more — set up properly the first time so it thrives for years to come.</p>
+                <span class="svc-panel-tag">Custom</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="svc-panel" style="background-image: url('https://plus.unsplash.com/premium_photo-1663050845391-db42b854ecfe?w=1400&auto=format&fit=crop&q=80'); background-color:#0e2412;">
+        <div class="svc-panel-inner">
+            <div class="svc-panel-content reveal">
+                <span class="svc-panel-num">06</span>
+                <div class="svc-panel-name">Tree Removal</div>
+                <p class="svc-panel-desc">Safe, efficient removal that protects your property and clears the way for new growth. Stumps, debris, everything handled.</p>
+                <span class="svc-panel-tag">On Request</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="svc-panel" style="background-image: url('https://images.unsplash.com/photo-1483385573908-0a2108937c4a?w=1400&q=80'); background-color:#142e18;">
+        <div class="svc-panel-inner">
+            <div class="svc-panel-content reveal">
+                <span class="svc-panel-num">07</span>
+                <div class="svc-panel-name">Snow Removal</div>
+                <p class="svc-panel-desc">Fast, reliable snow clearing for driveways, walkways, and steps — so you can get in, get out, and stay safe all winter long.</p>
+                <span class="svc-panel-tag">Seasonal</span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- WHY US -->
+<section class="why">
+    <div class="why-inner">
+        <div class="why-header">
+            <div class="reveal">
+                <h2 class="why-headline">Why Us?</h2>
+            </div>
+        </div>
+        <div class="why-grid">
+            <div class="why-card reveal">
+                <div class="why-card-top">
+                    <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+                    <div class="why-num">01</div>
+                </div>
+                <div class="why-title">Affordable Pricing</div>
+                <p class="why-desc">We keep our rates competitive because great lawn care shouldn't be out of reach for any Pittsburgh homeowner. No hidden fees, no surprises.</p>
+            </div>
+            <div class="why-card reveal d1">
+                <div class="why-card-top">
+                    <div class="why-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                    <div class="why-num">02</div>
+                </div>
+                <div class="why-title">7 Days a Week</div>
+                <p class="why-desc">Monday through Sunday, 9am–5pm. When your yard needs attention, we're available. No waiting until next week, no excuses.</p>
+            </div>
+            <div class="why-card reveal d2">
+                <div class="why-card-top">
+                    <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                    <div class="why-num">03</div>
+                </div>
+                <div class="why-title">Community First</div>
+                <p class="why-desc">Our Cuts For Vets program provides free bi-weekly service to veterans, first responders, and seniors 65+. Giving back isn't a slogan — it's how we operate.</p>
+            </div>
+        </div>
+        <div class="why-grid-bottom">
+            <div class="why-card reveal d1">
+                <div class="why-card-top">
+                    <div class="why-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+                    <div class="why-num">04</div>
+                </div>
+                <div class="why-title">Locally Owned</div>
+                <p class="why-desc">We're not a franchise — we're Pittsburgh neighbors. When you call, you get John and his crew directly. Real people, real accountability, every time.</p>
+            </div>
+            <div class="why-card reveal d2">
+                <div class="why-card-top">
+                    <div class="why-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                    <div class="why-num">05</div>
+                </div>
+                <div class="why-title">5-Star Rated</div>
+                <p class="why-desc">Countless five-star Google reviews from real Pittsburgh customers who trust us with their yards season after season. Our reputation speaks for itself.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- QUOTE FORM -->
+<section class="quote-section" id="quote">
+    <div class="quote-inner">
+        <div class="quote-left reveal">
+            <div class="sec-label" style="margin-bottom:1rem;">Free Quote</div>
+            <h2 class="cta-title">Get your free<br><em>estimate today.</em></h2>
+            <p class="cta-sub">No pressure, no obligation. Fill out the form and we'll get back to you within 24 hours — or call us directly at <strong>(412) 513-1335</strong>.</p>
+            <div class="quote-trust">
+                <div class="quote-trust-item">Always free quotes, no commitment</div>
+                <div class="quote-trust-item">Serving Greater Pittsburgh 7 days a week</div>
+                <div class="quote-trust-item">Family-owned, locally operated</div>
+                <div class="quote-trust-item">Trusted by veterans &amp; seniors</div>
+            </div>
+        </div>
+        <div class="quote-form reveal d2" id="quoteFormWrap">
+            <div class="form-title">Request a Free Quote</div>
+            <div class="form-subtitle">We'll reach out within 24 hours to confirm details.</div>
+            <form id="quoteForm" onsubmit="submitQuote(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" placeholder="Smith" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="(412) 000-0000" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="john@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="address">Property Address</label>
+                    <input type="text" id="address" placeholder="123 Main St, Pittsburgh, PA" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Service Needed</label>
+                    <select id="service" required>
+                        <option value="" disabled selected>Select a service…</option>
+                        <option>Lawn Mowing</option>
+                        <option>Hedge Trimming</option>
+                        <option>Retaining Walls</option>
+                        <option>Pond &amp; Waterfalls</option>
+                        <option>Installations</option>
+                        <option>Tree Removal</option>
+                        <option>Snow Removal</option>
+                        <option>Multiple Services</option>
+                        <option>Not Sure — Need Advice</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Additional Notes <span style="font-weight:400;opacity:0.6;">(optional)</span></label>
+                    <textarea id="notes" placeholder="Tell us more about your yard, any specific concerns, or the best time to reach you…"></textarea>
+                </div>
+                <button type="submit" class="form-submit">Submit Quote Request</button>
+                <p class="form-note">We respect your privacy. Your info is never shared or sold.</p>
+            </form>
+            <div class="form-success" id="formSuccess">
+                <div class="form-success-icon">🌿</div>
+                <h3>You're all set!</h3>
+                <p>We received your request and will be in touch within 24 hours. If you need us sooner, call <strong>(412) 513-1335</strong>.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div>
+            <a href="index.html" class="logo" style="text-decoration:none;display:flex;align-items:center;gap:0.75rem;">
+                <img src="logo-dark-green.png" alt="Landscaping Solutions Company" style="height:52px;width:auto;filter:brightness(0) invert(1);">
+                <div class="logo-text">
+                    <span class="logo-name" style="color:white;">Landscaping Solutions</span>
+                    <span class="logo-sub" style="color:rgba(255,255,255,0.45);">Greater Pittsburgh, PA</span>
+                </div>
+            </a>
+            <p class="footer-desc">Making your yard beautiful one cut at a time — and giving back to those who've given everything to our community.</p>
+        </div>
+        <div>
+            <div class="footer-heading">Quick Links</div>
+            <ul class="footer-links">
+                <li><a href="cuts-for-vets.html">Cuts For Vets Program</a></li>
+                <li><a href="services.html">Our Services</a></li>
+                <li><a href="index.html#mission">About Us</a></li>
+                <li><a href="index.html#contact">Get a Free Quote</a></li>
+                <li><a href="https://facebook.com/share/g/1DARWS8iP7/" target="_blank">Facebook Community</a></li>
+            </ul>
+        </div>
+        <div>
+            <div class="footer-heading">Contact</div>
+            <p class="footer-contact-item"><strong>(412) 513-1335</strong></p>
+            <p class="footer-contact-item">Greater Pittsburgh Area</p>
+            <p class="footer-contact-item"><strong>Hours:</strong> Mon–Sun, 9am–5pm</p>
+            <p class="footer-contact-item" style="margin-top:1rem;">
+                <a href="https://facebook.com/share/g/1DARWS8iP7/" target="_blank" style="color:var(--gold-lt);text-decoration:none;font-weight:600;font-size:0.82rem;">Join Our Facebook Community →</a>
+            </p>
+        </div>
+    </div>
+    <p class="footer-copy">© 2025 Landscaping Solutions Company · Greater Pittsburgh, PA · All rights reserved &nbsp;·&nbsp; <span class="footer-gold">Cuts For Vets — Because They Earned It.</span></p>
+</footer>
+
+<script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50));
+    function toggleMenu() {
+        const m = document.getElementById('mob-menu');
+        m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+    }
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    function submitQuote(e) {
+        e.preventDefault();
+        document.getElementById('quoteForm').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+    }
+
+    // Phone number formatting
+    document.getElementById('phone').addEventListener('input', function(e) {
+        let val = e.target.value.replace(/\D/g, '').substring(0, 10);
+        if (val.length >= 6) val = '(' + val.substring(0,3) + ') ' + val.substring(3,6) + '-' + val.substring(6);
+        else if (val.length >= 3) val = '(' + val.substring(0,3) + ') ' + val.substring(3);
+        e.target.value = val;
+    });
+</script>
+</body>
+</html>
